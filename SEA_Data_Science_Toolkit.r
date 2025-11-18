@@ -115,4 +115,28 @@ tryCatch({
     theme(legend.position = "none")
   
   ggsave("1_bar_chart_top10_confirmed.png", p1, width = 10, height = 6)
+
+    # Plot 2: Pie Chart
+  print("Generating Plot 2: Pie Chart...")
+  p2 <- ggplot(region_summary, aes(x = "", y = Conf_Percentage, fill = WHO_Region)) +
+    geom_bar(stat = "identity", width = 1) +
+    coord_polar("y", start = 0) + # This creates the pie chart
+    geom_text(
+      aes(label = scales::percent(Conf_Percentage, accuracy = 0.1)),
+      position = position_stack(vjust = 0.5)
+    ) +
+    labs(
+      title = "Proportion of Total Confirmed Cases by WHO Region",
+      fill = "WHO Region",
+      y = NULL,
+      x = NULL
+    ) +
+    theme(
+      axis.title = element_blank(),  # Remove axis titles
+      axis.text = element_blank(),   # Remove axis text (e.g., "1")
+      axis.ticks = element_blank(),  # Remove axis ticks
+      panel.grid = element_blank()   # Remove gridlines
+    ) # Remove axes and background
+  
+  ggsave("2_pie_chart_region_confirmed.png", p2, width = 10, height = 7)
   
