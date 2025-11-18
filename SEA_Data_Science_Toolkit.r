@@ -99,3 +99,20 @@ tryCatch({
     mutate(Time_Point = ifelse(Time_Point == "Confirmed", "This Week", "Last Week"))
 
   print("Prepared data for 1-Week Growth Line Chart.")
+    # --- 4. GENERATE AND SAVE PLOTS ---
+  
+  # Plot 1: Bar Chart
+  print("Generating Plot 1: Bar Chart...")
+  p1 <- ggplot(top_10_confirmed, aes(x = reorder(Country, Confirmed), y = Confirmed, fill = Country)) +
+    geom_bar(stat = "identity") +
+    coord_flip() + # Flip coordinates for horizontal bars
+    labs(
+      title = "Top 10 Countries by Total Confirmed Cases",
+      x = "Country",
+      y = "Total Confirmed Cases (in millions)"
+    ) +
+    scale_y_continuous(labels = scales::unit_format(unit = "M", scale = 1e-6)) +
+    theme(legend.position = "none")
+  
+  ggsave("1_bar_chart_top10_confirmed.png", p1, width = 10, height = 6)
+  
