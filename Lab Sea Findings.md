@@ -20,6 +20,8 @@ Detailed Analysis: The United States is a significant outlier, with over 4 milli
 
 Detailed Analysis: The pie chart shows that the Americas region alone represents 53.6% of all confirmed cases. This indicates a massive regional concentration. Europe is the next most-affected region at 18.2%, followed by South-East Asia (11.2%). The Western Pacific region, where the pandemic originated, accounts for the smallest share at 2.0%.
 
+![Pie Chart](2_pie_chart_region_confirmed.png)
+
 ---
 
 ## 3. Stacked Bar Chart: Regional Case Breakdown
@@ -27,6 +29,8 @@ Detailed Analysis: The pie chart shows that the Americas region alone represents
 **Key Finding**: The Americas region not only has the most cases, but a very large proportion of them are active, whereas Europe's cases are mostly recovered.
 
 Detailed Analysis: This chart provides crucial context. The bar for the Americas is dominated by a large "Active" case section, suggesting the pandemic is widespread and still in a major growth phase. In contrast, the bar for Europe shows a very large "Recovered" section and a much smaller "Active" section, indicating it was (at the time of this data) largely past the peak of its major wave.
+
+![Stacked Bar Chart](3_stacked_bar_chart_region_breakdown.png)
 
 ---
 
@@ -36,6 +40,8 @@ Detailed Analysis: This chart provides crucial context. The bar for the Americas
 
 Detailed Analysis: Every country on the chart shows an upward-sloping line, meaning none are seeing a decline in their cumulative case counts. The slopes for the US, Brazil, and India show the largest absolute increases over the week. Notably, South Africa's line is particularly steep, indicating very fast recent growth that propelled it into the top 10.
 
+![Line Chart](4_line_chart_1week_growth.png)
+
 ---
 
 ## 5. Histogram: Distribution of Case Fatality Rate (CFR)
@@ -44,6 +50,7 @@ Detailed Analysis: Every country on the chart shows an upward-sloping line, mean
 
 Detailed Analysis: The histogram is "right-skewed." The tallest bars are on the left, showing that the vast majority of countries have a CFR between 0% and 5%. However, the long "tail" to the right shows that a number of countries have much higher rates (10%, 15%, or more). This variation could be due to differences in testing availability (fewer tests = higher CFR), healthcare system capacity, or the age demographic of the population.
 
+![Histogram](5_histogram_fatality_rate.png)
 
 ```python
 
