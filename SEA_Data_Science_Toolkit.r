@@ -139,4 +139,18 @@ tryCatch({
     ) # Remove axes and background
   
   ggsave("2_pie_chart_region_confirmed.png", p2, width = 10, height = 7)
+    # Plot 3: Stacked Bar Chart
+  print("Generating Plot 3: Stacked Bar Chart...")
+  p3 <- ggplot(region_summary_long, aes(x = reorder(WHO_Region, -Count), y = Count, fill = Case_Type)) +
+    geom_bar(stat = "identity", position = "stack") +
+    labs(
+      title = "Case Breakdown (Active, Deaths, Recovered) by WHO Region",
+      x = "WHO Region",
+      y = "Total Cases (in millions)",
+      fill = "Case Type"
+    ) +
+    scale_y_continuous(labels = scales::unit_format(unit = "M", scale = 1e-6)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  ggsave("3_stacked_bar_chart_region_breakdown.png", p3, width = 11, height = 7)
   
