@@ -139,6 +139,7 @@ tryCatch({
     ) # Remove axes and background
   
   ggsave("2_pie_chart_region_confirmed.png", p2, width = 10, height = 7)
+  
     # Plot 3: Stacked Bar Chart
   print("Generating Plot 3: Stacked Bar Chart...")
   p3 <- ggplot(region_summary_long, aes(x = reorder(WHO_Region, -Count), y = Count, fill = Case_Type)) +
@@ -153,4 +154,20 @@ tryCatch({
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
   
   ggsave("3_stacked_bar_chart_region_breakdown.png", p3, width = 11, height = 7)
+
+    # Plot 4: Line Chart
+  print("Generating Plot 4: Line Chart...")
+  p4 <- ggplot(top_10_growth, aes(x = Time_Point, y = Cases, color = Country, group = Country)) +
+    geom_line(linewidth = 1.2) +
+    geom_point(size = 3) +
+    labs(
+      title = "1-Week Confirmed Case Growth (Top 10 Countries)",
+      x = "Time Point",
+      y = "Confirmed Cases (in millions)",
+      color = "Country"
+    ) +
+    scale_y_continuous(labels = scales::unit_format(unit = "M", scale = 1e-6)) +
+    theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+    
+  ggsave("4_line_chart_1week_growth.png", p4, width = 12, height = 7)
   
