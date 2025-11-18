@@ -139,7 +139,7 @@ tryCatch({
     ) # Remove axes and background
   
   ggsave("2_pie_chart_region_confirmed.png", p2, width = 10, height = 7)
-  
+
     # Plot 3: Stacked Bar Chart
   print("Generating Plot 3: Stacked Bar Chart...")
   p3 <- ggplot(region_summary_long, aes(x = reorder(WHO_Region, -Count), y = Count, fill = Case_Type)) +
@@ -171,3 +171,28 @@ tryCatch({
     
   ggsave("4_line_chart_1week_growth.png", p4, width = 12, height = 7)
   
+  # Plot 5: Histogram
+  print("Generating Plot 5: Histogram...")
+  p5 <- ggplot(data_clean, aes(x = Deaths_per_100_Cases)) +
+    geom_histogram(
+      binwidth = 1,
+      fill = "#0072B2",
+      color = "white",
+      alpha = 0.8
+    ) +
+    labs(
+      title = "Distribution of Case Fatality Rate (CFR)",
+      subtitle = "CFR = Deaths per 100 Cases",
+      x = "Case Fatality Rate (%)",
+      y = "Number of Countries"
+    ) +
+    scale_x_continuous(breaks = seq(0, max(data_clean$Deaths_per_100_Cases, na.rm = TRUE), by = 2))
+    
+  ggsave("5_histogram_fatality_rate.png", p5, width = 10, height = 6)
+  
+  print("All visualizations have been generated and saved as PNG files in your working directory.")
+  
+}, error = function(e) {
+  print(paste("An error occurred. Please ensure 'country_wise_latest.csv' is in the same directory as this script."))
+  print(paste("Error message:", e$message))
+})
