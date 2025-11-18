@@ -47,3 +47,55 @@ tryCatch({
     )
   
   print("Data loaded and cleaned successfully.")
+  
+  # --- 3. DATA PREPARATION FOR PLOTS ---
+  
+  # Prep 1: Get Top 10 countries by confirmed cases
+  top_10_confirmed <- data_clean %>%
+    arrange(desc(Confirmed)) %>%
+    top_n(10, Confirmed)
+  
+  print("Prepared data for Top 10 Bar Chart.")
+  
+  # Prep 2: Summarize data by WHO Region
+  region_summary <- data_clean %>%
+    group_by(WHO_Region) %>%
+    summarise(
+      Total_Confirmed = sum(Confirmed, na.rm = TRUE),
+      Total_Deaths = sum(Deaths, na.rm = TRUE),
+      Total_Recovered = sum(Recovered, na.rm = TRUE),
+      Total_Active = sum(Active, na.rm = TRUE)
+    ) %>%
+    # Calculate percentage for pie chart
+    mutate(
+      Conf_Percentage = Total_Confirmed / sum(Total_Confirmed),
+      Total_Global = sum(Total_Confirmed)
+    )
+  
+  print("Prepared data for Regional Pie and Stacked Bar Charts.")
+  
+  # Prep 3: Data for Stacked Bar Chart (Case Breakdown)
+  region_summary_long <- region_summary %>%
+    select(WHO_Region, Total_Deaths, Total_Recovered, Total_Active) %>%
+    pivot_longer(
+      cols = -WHO_Region,
+      names_to = "Case_Type",
+      values_to = "Count"
+    ) %>%
+    # Clean up labels for the legend
+    mutate(Case_Type = str_replace(Case_Type, "Total_", ""))
+
+  # Prep 4: Data for Line Chart (1-week growth for top 10)
+  top_10_growth <- data_clean %>%
+    arrange(desc(Confirmed)) %>%
+    top_n(10, Confirmed) %>%
+    select(Country, Confirmed_last_week, Confirmed) %>%
+    pivot_longer(
+      cols = -Country,
+      names_to = "Time_Point",
+      values_to = "Cases"
+    ) %>%
+    # Make time point names clearer
+    mutate(Time_Point = ifelse(Time_Point == "Confirmed", "This Week", "Last Week"))
+
+  print("Prepared data for 1-Week Growth Line Chart.")
