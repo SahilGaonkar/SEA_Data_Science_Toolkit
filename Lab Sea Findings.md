@@ -10,7 +10,7 @@
 
 Detailed Analysis: The United States is a significant outlier, with over 4 million confirmed cases, which is substantially more than any other nation. Brazil and India are the next most-affected countries, both showing case counts over 1 million. The remaining countries in the top 10 (e.g., Russia, South Africa, Mexico) form a cluster at a lower, though still severe, level.
 
-
+![Bar Chart]( 1_bar_chart_top10_confirmed.png)
 
 ---
 
